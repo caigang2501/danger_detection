@@ -1,4 +1,4 @@
-import os
+import os,shutil,time
 
 def clear_dir(path):
     for file_name in os.listdir(path):
@@ -8,6 +8,18 @@ def clear_dir(path):
         else:
             clear_dir(file_path)
 
+def mk_vedio_dirtree(root):
+    os.mkdir(root)
+    os.mkdir(root+'/fired')
+    os.mkdir(root+'/frames')
+    os.mkdir(root+'/frames/1')
+    os.mkdir(root+'/in_area')
+    os.mkdir(root+'/no_helmet')
+
+
+
 if __name__=='__main__':
-    save_path = 'train copy'
-    clear_dir(save_path)
+    root = 'data/'+str(round(time.time()))
+    mk_vedio_dirtree(root)
+    time.sleep(4)
+    shutil.rmtree(root)
