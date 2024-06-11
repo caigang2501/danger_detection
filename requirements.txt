@@ -1,0 +1,10 @@
+tensorflow
+keras
+opencv-python
+flask
+minio
+caffe
+
+
+
+face_recognition

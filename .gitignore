@@ -1,0 +1,4 @@
+*.pt
+
+data/*
+video_processing/camera/*

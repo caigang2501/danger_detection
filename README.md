@@ -1,0 +1,1 @@
+mv data/models/face_parsing.farl.lapa.main_ema_136500_jit191.pt models/face_parsing/face_parsing_1.0/face_parsing.farl.lapa.main_ema_136500_jit191.pt
