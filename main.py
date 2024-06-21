@@ -3,7 +3,6 @@ import multiprocessing as mp
 from collections import deque
 from typing import List
 import torch
-
 os.environ['TORCH_HOME']=os.path.join(os.path.dirname(os.path.abspath(__file__)),'data/models')
 # from fire_detect.detect_fire import DtcFire
 from fire_detect.two_classfy import Predictor as fire_Predictor
@@ -177,12 +176,15 @@ def deal_helmet_result(sub_amount,frame_folder):
 def main_fire(mg_dic):
     minio_db = net_tool.MyMinio('zhgd')
     names_fired = detect_fire_by_torch(mg_dic['frame_folder'])
-    paths_fired_remote = [minio_root+'detection/fired/'+str(datetime.date.today())+'/'+file_name for file_name in names_fired]
+    paths_fired_remote = ['detection/fired/'+str(datetime.date.today())+'/'+file_name for file_name in names_fired]
     paths_fired_local = [mg_dic['frame_folder'][:-10]+"/fired/"+file_name for file_name in names_fired]
+    fired_info = []
     for i in range(len(names_fired)):
+        date = ocr_tool.get_video_date(paths_fired_local[i]) 
         minio_db.update(paths_fired_remote[i],paths_fired_local[i])
-    mg_dic['fired'] = paths_fired_remote
-    return paths_fired_remote
+        fired_info.append({'date':date,'path':minio_root+paths_fired_remote[i]})
+    mg_dic['fired'] = fired_info
+    return fired_info
 
 def main_helmet(sub_amount,mg_dic):
     facehelper = FaceHelper()
@@ -276,7 +278,7 @@ def main(url:str,points:List,frame_interval,sub_amount):
                     'in_area':mg_dic['in_area']}
         
         print(results)
-    shutil.rmtree(root)
+    # shutil.rmtree(root)
     return results
 
 if __name__=='__main__':
@@ -284,7 +286,7 @@ if __name__=='__main__':
     # points = (0, 0, 60, 330, 480, 410, 500, 50)
     sub_amount = 10
     points = (0,0)
-    url = 'http://10.83.190.87:9000/zhgd/117.190.37.50_15000_6_1712460406053.mp4'
+    url = 'http://10.83.190.87:9000/zhgd/test.mp4'
     main(url,points,frame_interval,sub_amount)
     # add_face('http://10.83.190.87:9000/zhgd/detection/faces/27/张三.jpg')
 

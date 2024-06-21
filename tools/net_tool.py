@@ -64,9 +64,11 @@ class MyMinio:
 
 if __name__=='__main__':
     minio_db = MyMinio('zhgd')
-    local_file_path = 'data/face/faces/zhangsan.jpg'
-    minio_object_name = 'detection/faces/'+str(datetime.date.today().day)+'/'+local_file_path.split('/')[-1]
-    print(minio_object_name)
+    local_file_path = 'data/videos/test.mp4'
+    # minio_object_name = 'detection/faces/'+str(datetime.date.today().day)+'/'+local_file_path.split('/')[-1]
+    minio_object_name = 'test.mp4'
+    minio_object_name = 'detection/fired/2024-06-20/frame_19.jpg'
+    local_file_path = 'data\objdetect\othors\dog1.jpg'
     minio_db.update(minio_object_name,local_file_path)
-    minio_db.down_load()
+    # minio_db.down_load()
     

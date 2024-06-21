@@ -1,10 +1,5 @@
-tensorflow
-keras
 opencv-python
 flask
 minio
-caffe
+torch
 
-
-
-face_recognition

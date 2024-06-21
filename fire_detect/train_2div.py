@@ -42,7 +42,7 @@ class CustomDataset(ImageFolder):
 
 if __name__=='__main__':
     # 设置数据集路径
-    data_root = 'data/objdetect/train/fire'
+    data_root = 'data/train/fire'
 
     # 定义数据预处理
     transform = T.Compose([
