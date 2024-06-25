@@ -1,7 +1,7 @@
 import cv2
 import os
 
-def extract_frames(video_path, output_folder,second=1):
+def extract_frames(video_path, output_folder,second=1,ordered=False):
     # 打开视频文件
     cap = cv2.VideoCapture(video_path)
     
@@ -28,7 +28,11 @@ def extract_frames(video_path, output_folder,second=1):
         # 检查与上一个帧的时间戳差异是否大于1秒
         if timestamp - last_timestamp >= 1:
             # 保存帧为图片文件
-            output_path = os.path.join(output_folder, f"frame_{int(timestamp)}.jpg")
+            if ordered:
+                s = f"0000{int(timestamp)}"[-5:]
+                output_path = os.path.join(output_folder, f"frame_{s}.jpg")
+            else:
+                output_path = os.path.join(output_folder, f"frame_{int(timestamp)}.jpg")
             cv2.imwrite(output_path, frame)
 
             # 更新上一个帧的时间戳

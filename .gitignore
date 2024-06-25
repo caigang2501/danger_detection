@@ -1,4 +1,5 @@
 *.pt
+*.pth
 
 data/*
 video_processing/camera/*

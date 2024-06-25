@@ -18,7 +18,7 @@ def test():
 
 
 if __name__=='__main__':
-    test()
+    print(round(0.12345,3))
 
 
 

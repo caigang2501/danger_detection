@@ -8,7 +8,6 @@ import torch
 
 import torch.nn as nn
 
-
 class CustomResNet50(nn.Module):
     def __init__(self, num_classes=2):
         super(CustomResNet50, self).__init__()
@@ -55,7 +54,7 @@ if __name__=='__main__':
     batch_size = 32
     custom_dataloader = DataLoader(custom_dataset, batch_size=batch_size, shuffle=True)
     # 创建自定义 ResNet50 模型
-    model = CustomResNet50(num_classes=2)
+    model = CustomResNet50(num_classes=3)
 
     # Remove quantization
     # model = resnet50(pretrained=True)
@@ -70,7 +69,7 @@ if __name__=='__main__':
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
     # Train the model on your custom dataset
-    num_epochs = 1500
+    num_epochs = 1000
     min_loss = 0.2
     for epoch in range(num_epochs):
         for inputs, labels in custom_dataloader:

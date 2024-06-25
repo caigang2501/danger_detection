@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder
 
 
-# 定义自定义数据集类
+# 默认加载图片顺序错误的修正
 class CustomDataset_pred(ImageFolder):
     def __init__(self, root, transform=None):
         super().__init__(root, transform=transform)
@@ -22,6 +22,9 @@ class CustomDataset_pred(ImageFolder):
         if self.transform is not None:
             img = self.transform(img)
         return img, label
+
+
+
     
 # 创建与训练时相同结构的模型
 class CustomResNet50(nn.Module):
@@ -47,7 +50,7 @@ class Predictor:
         T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])  # 标准化
         ])
         
-        self.model = CustomResNet50(num_classes=2)
+        self.model = CustomResNet50(num_classes=3)
         self.model.load_state_dict(torch.load(model_path))
         self.model.eval()
 

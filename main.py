@@ -22,7 +22,7 @@ from tools import net_tool,dir_tools,ocr_tool
 #         minio_db.update('detection/fired/'+str(datetime.date.today())+'/'+img_path.split('/')[-1],img_path)
 minio_root = 'http://10.83.190.87:9000/zhgd/'
 # sub_amount = 10
-rec_accuracy = 0.15
+rec_accuracy = 0.2
 
 
 def detect_in_area(t1,t2,points,frame_folder):
@@ -81,29 +81,36 @@ def deal_area_result(points,sub_amount,frame_folder):
     return result
 
 
-def detect_fire_by_torch(frame_folder):
-    fire_model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'data/models/torch_firedtc_resnet50.pth')
+
+def detect_fire_by_torch(frame_folder:str):
+    orderd_frame_folder = frame_folder.replace('/frames','/ordered_frames')
+    fire_model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'data/models/torch_firedtc_resnet50_3.pth')
     fire_predictor = fire_Predictor(fire_model_path)
 
-    result = fire_predictor.predict_bypath(frame_folder[:-2])
+    #由于加载图片顺序错误，结果错位
+    result = fire_predictor.predict_bypath(orderd_frame_folder[:-2])
+    print(result[1])
     result = [int(n) for n in result[1]]
     result.append(0)
     # print(type(result[0]),result)
 
-    len_one = 3
     start = False
+    warning = False
     filed_result = []
     destination_path = frame_folder[:-10]+'/fired/'
     for j,n in enumerate(result):
         if start:
-            if n==0:
-                if j-i>=len_one:
+            if n!=0 and not warning:
+                if j-i>=5:
                     filed_result.append((i+j)//2)
                     file_name = f"frame_{(i+j)//2}.jpg"
                     shutil.copyfile(frame_folder+file_name,destination_path+file_name)
+                    warning = True
+            else:
                 start = False
+                warning = False
         else:
-            if n==1:
+            if n>=1:
                 i = j
                 start = True
     
@@ -259,8 +266,10 @@ def main(url:str,points:List,frame_interval,sub_amount):
     # minio_db.down_load(url.split('zhgd/')[-1],video_path)
     root = 'data/'+str(round(time.time()))
     frame_folder = root+'/frames/1/'
+    ordered_frame_folder = root+'/ordered_frames/1/'
     dir_tools.mk_vedio_dirtree(root)
     v2p_by_time.extract_frames(video_path, frame_folder,second=frame_interval)
+    v2p_by_time.extract_frames(video_path, ordered_frame_folder,second=frame_interval,ordered=True)
 
 
     with mp.Manager() as mg:
@@ -278,7 +287,7 @@ def main(url:str,points:List,frame_interval,sub_amount):
                     'in_area':mg_dic['in_area']}
         
         print(results)
-    # shutil.rmtree(root)
+    shutil.rmtree(root)
     return results
 
 if __name__=='__main__':
@@ -288,6 +297,8 @@ if __name__=='__main__':
     points = (0,0)
     url = 'http://10.83.190.87:9000/zhgd/test.mp4'
     main(url,points,frame_interval,sub_amount)
+    # r = detect_fire_by_torch('data/output_frames/frames/1/')
+    # print(r)
     # add_face('http://10.83.190.87:9000/zhgd/detection/faces/27/张三.jpg')
 
 
