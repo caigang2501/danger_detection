@@ -1,10 +1,13 @@
-import os
+import os,socket
 from PIL import Image
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 import pytesseract,easyocr
-# tesser_path = '../usr/bin/tesseract'
-tesser_path = 'data/Tesseract-OCR/tesseract.exe'
+
+if 'WINDOWS' in socket.gethostname():
+    tesser_path = 'data/Tesseract-OCR/tesseract.exe'
+else:
+    tesser_path = '../usr/bin/tesseract'
 
 def ocr_tesseract(img_path):
     image = Image.open(img_path)
