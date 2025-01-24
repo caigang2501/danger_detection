@@ -40,5 +40,19 @@ def extract_frames(video_path, output_folder,second=1,ordered=False):
 
     # 释放视频捕捉对象
     cap.release()
+def mk_vedio_dirtree(root):
+    os.mkdir(root)
+    os.mkdir(root+'/fired')
+    os.mkdir(root+'/frames')
+    os.mkdir(root+'/frames/1')
+    os.mkdir(root+'/in_area')
+    os.mkdir(root+'/no_helmet')
 
+if __name__=='__main__':
+    video_path = "data/videos/test copy.mp4"
 
+    root = 'data/asdf'
+    frame_folder = root+'/frames/1/'
+    ordered_frame_folder = root+'/ordered_frames/1/'
+    extract_frames(video_path, frame_folder,second=3)
+    extract_frames(video_path, ordered_frame_folder,second=3,ordered=True)

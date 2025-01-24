@@ -12,9 +12,9 @@ def download_by_requests(path,download_path):
 
 class MyMinio:
     def __init__(self,bucketname) -> None:
-        minio_endpoint = "10.83.190.87:9000"
-        minio_access_key = "minioadmin"
-        minio_secret_key = "minioadmin"
+        minio_endpoint = "10.83.190.141:9000"
+        minio_access_key = "miniozhgd"
+        minio_secret_key = "miniozhgd"
         self.bucket_name = bucketname
 
         self.minio_client = Minio(

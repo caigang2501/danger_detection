@@ -15,6 +15,7 @@ def mk_vedio_dirtree(root):
     os.mkdir(root+'/frames/1')
     os.mkdir(root+'/in_area')
     os.mkdir(root+'/no_helmet')
+    os.mkdir(root+'/gathered')
 
 
 
