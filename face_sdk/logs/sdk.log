@@ -1,61 +1,80 @@
-INFO 2025-01-24 14:55:45 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:55:45 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:03 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:04 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:04 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:04 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:04 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:04 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:04 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:04 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
-INFO 2025-01-24 14:56:04 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:04 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:16 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:16 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:16 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:17 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:17 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:17 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:17 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:17 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
-INFO 2025-01-24 14:56:17 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:18 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:18 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
-INFO 2025-01-24 14:56:18 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:18 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:18 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:18 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:27 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:27 utils.py: 160] NumExpr defaulting to 8 threads.
-INFO 2025-01-24 14:56:27 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:27 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:27 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
-INFO 2025-01-24 14:56:27 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:27 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:27 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:27 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:27 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
-INFO 2025-01-24 14:56:28 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
-INFO 2025-01-24 14:56:28 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:28 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:28 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
-INFO 2025-01-24 14:56:28 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:28 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
-INFO 2025-01-24 14:56:28 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
-INFO 2025-01-24 14:56:28 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
-INFO 2025-01-24 14:56:28 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-INFO 2025-01-24 14:56:28 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
-WARNING 2025-01-24 14:57:57 easyocr.py: 80] Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU.
+INFO 2025-01-26 17:34:15 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 17:34:20 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 17:34:21 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 17:34:21 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 17:34:27 _internal.py: 224]  * Detected change in 'D:\\anaconda3\\Lib\\functools.py', reloading
+INFO 2025-01-26 17:34:27 _internal.py: 224]  * Detected change in 'D:\\workspace\\hb_projects\\danger_detection\\video_processing\\test_face_rec.py', reloading
+INFO 2025-01-26 17:34:27 _internal.py: 224]  * Detected change in 'd:\\workspace\\hb_projects\\danger_detection\\video_processing\\test_face_rec.py', reloading
+INFO 2025-01-26 17:34:29 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 17:34:35 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 17:34:36 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 17:34:36 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 17:35:11 _internal.py: 224]  * Detected change in 'D:\\anaconda3\\Lib\\colorsys.py', reloading
+INFO 2025-01-26 17:35:11 _internal.py: 224]  * Detected change in 'D:\\anaconda3\\Lib\\random.py', reloading
+INFO 2025-01-26 17:35:13 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 17:35:19 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 17:35:19 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 17:35:19 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 17:57:49 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 17:57:50 _internal.py: 224] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO 2025-01-26 17:57:50 _internal.py: 224] [33mPress CTRL+C to quit[0m
+INFO 2025-01-26 17:57:50 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 17:57:56 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 17:57:56 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 17:57:56 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 18:00:00 _internal.py: 224]  * Detected change in 'D:\\anaconda3\\Lib\\multiprocessing\\spawn.py', reloading
+INFO 2025-01-26 18:00:04 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:00:05 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
+INFO 2025-01-26 18:00:05 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:00:05 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
+INFO 2025-01-26 18:00:05 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
+INFO 2025-01-26 18:00:05 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:00:05 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
+INFO 2025-01-26 18:00:05 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
+INFO 2025-01-26 18:00:05 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:00:06 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
+INFO 2025-01-26 18:00:19 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:00:19 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:00:19 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:00:30 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:00:30 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:02:08 easyocr.py: 80] Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU.
+INFO 2025-01-26 18:02:14 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 18:02:20 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:02:21 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 18:02:21 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 18:04:42 _internal.py: 224]  * Detected change in 'D:\\anaconda3\\Lib\\multiprocessing\\process.py', reloading
+INFO 2025-01-26 18:04:43 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 18:04:49 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:04:49 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 18:04:49 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 18:05:28 _internal.py: 224]  * Detected change in 'd:\\workspace\\hb_projects\\danger_detection\\main.py', reloading
+INFO 2025-01-26 18:05:28 _internal.py: 224]  * Detected change in 'D:\\workspace\\hb_projects\\danger_detection\\main.py', reloading
+INFO 2025-01-26 18:05:28 _internal.py: 224]  * Detected change in 'd:\\workspace\\hb_projects\\danger_detection\\main.py', reloading
+INFO 2025-01-26 18:05:28 _internal.py: 224]  * Detected change in 'D:\\workspace\\hb_projects\\danger_detection\\main.py', reloading
+INFO 2025-01-26 18:05:30 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 18:05:36 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:05:37 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 18:05:37 _internal.py: 224]  * Debugger PIN: 162-349-206
+INFO 2025-01-26 18:05:55 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:05:56 FaceDetModelLoader.py: 16] Start to analyze the face detection model, model path: models, model category: face_detection，model name: face_detection_1.0
+INFO 2025-01-26 18:05:56 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:05:56 FaceDetModelLoader.py: 34] Successfully loaded the face detection model!
+INFO 2025-01-26 18:05:56 FaceAlignModelLoader.py: 16] Start to analyze the face landmark model, model path: models, model category: face_alignment，model name: face_alignment_1.0
+INFO 2025-01-26 18:05:56 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:05:56 FaceAlignModelLoader.py: 29] Successfully loaded the face landmark model!
+INFO 2025-01-26 18:05:56 FaceRecModelLoader.py: 16] Start to analyze the face recognition model, model path: models, model category: face_recognition,model name: face_recognition_1.0
+INFO 2025-01-26 18:05:56 BaseModelLoader.py: 34] Successfully parsed the model configuration file meta.json!
+INFO 2025-01-26 18:05:56 FaceRecModelLoader.py: 31] Successfully loaded the face recognition model!
+INFO 2025-01-26 18:06:04 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:06:04 utils.py: 160] NumExpr defaulting to 8 threads.
+INFO 2025-01-26 18:06:13 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:06:59 easyocr.py: 80] Neither CUDA nor MPS are available - defaulting to CPU. Note: This module is much faster with a GPU.
+INFO 2025-01-26 18:07:03 _internal.py: 224] 127.0.0.1 - - [26/Jan/2025 18:07:03] "POST /detect HTTP/1.1" 200 -
+INFO 2025-01-26 18:08:05 _internal.py: 224]  * Detected change in 'D:\\workspace\\hb_projects\\danger_detection\\danger_detection.zip', reloading
+INFO 2025-01-26 18:08:05 _internal.py: 224]  * Detected change in 'd:\\workspace\\hb_projects\\danger_detection\\danger_detection.zip', reloading
+INFO 2025-01-26 18:08:07 _internal.py: 224]  * Restarting with watchdog (windowsapi)
+INFO 2025-01-26 18:08:13 utils.py: 160] NumExpr defaulting to 8 threads.
+WARNING 2025-01-26 18:08:13 _internal.py: 224]  * Debugger is active!
+INFO 2025-01-26 18:08:13 _internal.py: 224]  * Debugger PIN: 162-349-206

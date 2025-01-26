@@ -93,10 +93,10 @@ def final_test(img_path):
 
 
 if __name__=='__main__':
-    img_path = 'data/videos/test_frames/frame_0.jpg'
     img_path = 'data/output_frames/frames/1/frame_0.jpg'
     # test1(img_path)
-    final_test(img_path)
+    # final_test(img_path)
+    ocr_easy(img_path)
 
 
 

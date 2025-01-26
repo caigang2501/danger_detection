@@ -24,7 +24,6 @@ minio_root = 'http://10.83.190.141:9000/zhgd/'
 # sub_amount = 10
 rec_accuracy = 0.2
 minio_db = net_tool.MyMinio('zhgd')
-facehelper = FaceHelper()
 
 
 def detect_human(t1,t2,points,frame_folder):
@@ -54,6 +53,7 @@ def filter_out(result_boxs):
     return result
 
 def deal_final_result(mg_dic,names,folder):
+    facehelper = mg_dic['facehelper']
     paths_remote = [f'detection/{folder}/'+str(datetime.date.today())+'/'+file_name for file_name in names]
     paths_local = [mg_dic['frame_folder'][:-9]+f"/{folder}/"+file_name for file_name in names]
 
@@ -180,6 +180,7 @@ def main_fire(mg_dic):
     return fired_info
 
 def add_face(img_minio_path:str):
+    facehelper = FaceHelper()
     try:
         img_name = img_minio_path.split('/')[-1]
         portrait_path = 'data/face/faces/'+img_name
@@ -206,7 +207,6 @@ def all_face():
 
 def main(url:str,points:List,frame_interval,sub_amount):
     video_path = "data/videos/temp_video.mp4"
-
     net_tool.download_by_requests(url,video_path)
     # minio_db.down_load(url.split('zhgd/')[-1],video_path)
     root = 'data/'+str(round(time.time()))
@@ -219,24 +219,25 @@ def main(url:str,points:List,frame_interval,sub_amount):
     with mp.Manager() as mg:
         mg_dic = mg.dict()
         mg_dic['frame_folder'] = frame_folder
+        mg_dic['facehelper'] = FaceHelper()
         p_fire = mp.Process(target=main_fire,args=(mg_dic,))
-        p_human = mp.Process(target=deal_human_result,args=(points,sub_amount,mg_dic))
+        # p_human = mp.Process(target=deal_human_result,args=(points,sub_amount,mg_dic))
         p_helmet = mp.Process(target=deal_helmet_result,args=(sub_amount,mg_dic))
-        p_fire.start(),p_human.start(),p_helmet.start()
-        p_fire.join(),p_human.join(),p_helmet.join()
+        p_fire.start(),p_helmet.start()
+        p_fire.join(),p_helmet.join()
         results = { 
             'eara':ocr_tool.get_video_eara(frame_folder+'/frame_0.jpg'),
             'fired':mg_dic['fired'],
             'no_helmet':mg_dic['no_helmet'],
-            'in_area':mg_dic['in_area'],
-            'gathered':mg_dic['gathered']
+            # 'in_area':mg_dic['in_area'],
+            # 'gathered':mg_dic['gathered']
         }
     shutil.rmtree(root)
     return results
 
 if __name__=='__main__':
-    frame_interval = 10
     points = ((0, 0, 60, 330, 480, 410, 500, 50),(300,300))
+    frame_interval = 10
     sub_amount = 10
     # points = (0,0)
     url = 'http://10.83.190.141:9000/zhgd/detection/test.mp4'
@@ -245,6 +246,8 @@ if __name__=='__main__':
     # r = detect_fire_by_torch('data/output_frames/frames/1/')
     # print(r)
     # add_face('http://10.83.190.87:9000/zhgd/detection/faces/27/张三.jpg')
+    # scp D:\workspace\hb_projects\danger_detection/danger_detection.zip user@10.83.190.141:caigang/
+    # scp D:\workspace\hb_projects\danger_detection/main.py user@10.83.190.141:caigang/danger_detection/
 
 
 
