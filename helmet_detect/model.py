@@ -6,7 +6,7 @@
   @Last Modified time: 2019-11-01 11:22:05 
 """
 from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.models.detection.faster_rcnn import FasterRCNN
+from torchvision.models.detection.faster_rcnn import FasterRCNN,ResNet50_Weights
 
 
 def fasterrcnn_resnet_fpn(resnet_name='resnet50', pretrained_backbone=True, progress=True, num_classes=2, **kwargs):
@@ -30,7 +30,7 @@ def fasterrcnn_resnet_fpn(resnet_name='resnet50', pretrained_backbone=True, prog
         - labels (``Int64Tensor[N]``): the predicted labels for each image
         - scores (``Tensor[N]``): the scores or each prediction
     """
-    backbone = resnet_fpn_backbone(resnet_name, pretrained_backbone)
+    backbone = resnet_fpn_backbone(backbone_name=resnet_name, weights=ResNet50_Weights.DEFAULT)
     model = FasterRCNN(backbone, num_classes,
                        box_detections_per_img=100, **kwargs)
     return model

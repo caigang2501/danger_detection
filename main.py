@@ -53,13 +53,16 @@ def filter_out(result_boxs):
     return result
 
 def deal_final_result(mg_dic,names,folder):
-    facehelper = mg_dic['facehelper']
+    facehelper = FaceHelper()
     paths_remote = [f'detection/{folder}/'+str(datetime.date.today())+'/'+file_name for file_name in names]
     paths_local = [mg_dic['frame_folder'][:-9]+f"/{folder}/"+file_name for file_name in names]
 
     recognized = []
     for i in range(len(names)):
-        recognizeds = facehelper.rec_face(paths_local[i],rec_accuracy)
+        if folder=='no_helmet':
+            recognizeds = facehelper.rec_face(paths_local[i],rec_accuracy)
+        else:
+            recognizeds = {}
         date = ocr_tool.get_video_date(paths_local[i])
         minio_db.update(paths_remote[i],paths_local[i])
         recognized.append({'names':recognizeds,'date':date,'path':minio_root+paths_remote[i]})
@@ -89,8 +92,6 @@ def deal_human_result(points,sub_amount,mg_dic):
     mg_dic['gathered'] = deal_final_result(mg_dic,names_gathered,'gathered')
 
     return
-
-
 
 def detect_fire_by_torch(frame_folder:str):
     orderd_frame_folder = frame_folder.replace('/frames','/ordered_frames')
@@ -219,18 +220,17 @@ def main(url:str,points:List,frame_interval,sub_amount):
     with mp.Manager() as mg:
         mg_dic = mg.dict()
         mg_dic['frame_folder'] = frame_folder
-        mg_dic['facehelper'] = FaceHelper()
         p_fire = mp.Process(target=main_fire,args=(mg_dic,))
-        # p_human = mp.Process(target=deal_human_result,args=(points,sub_amount,mg_dic))
+        p_human = mp.Process(target=deal_human_result,args=(points,sub_amount,mg_dic))
         p_helmet = mp.Process(target=deal_helmet_result,args=(sub_amount,mg_dic))
-        p_fire.start(),p_helmet.start()
-        p_fire.join(),p_helmet.join()
+        p_fire.start(),p_helmet.start(),p_human.start()
+        p_fire.join(),p_helmet.join(),p_human.join()
         results = { 
             'eara':ocr_tool.get_video_eara(frame_folder+'/frame_0.jpg'),
             'fired':mg_dic['fired'],
             'no_helmet':mg_dic['no_helmet'],
-            # 'in_area':mg_dic['in_area'],
-            # 'gathered':mg_dic['gathered']
+            'in_area':mg_dic['in_area'],
+            'gathered':mg_dic['gathered']
         }
     shutil.rmtree(root)
     return results

@@ -11,7 +11,7 @@ ENV FLASK_APP=appname.app.py
 
 CMD ["flask", "run", "--host=0.0.0.0"]
 
-
+# scp D:\workspace\hb_projects\danger_detection\main.py user@10.83.190.141:caigang/danger_detection/main.py R8z@6cDY
 # docker build -t danger_detection .
 # docker save -o danger_detection.tar danger_detection
 # scp danger_env.tar user@10.83.190.141:caigang/ 
