@@ -1,5 +1,5 @@
 *.pt
 *.pth
-
+__pycache__
 data/*
 video_processing/camera/*

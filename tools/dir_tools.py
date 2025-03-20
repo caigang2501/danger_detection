@@ -9,6 +9,8 @@ def clear_dir(path):
             clear_dir(file_path)
 
 def mk_vedio_dirtree(root):
+    if os.path.exists(root):
+        shutil.rmtree(root)
     os.mkdir(root)
     os.mkdir(root+'/fired')
     os.mkdir(root+'/frames')
@@ -16,11 +18,8 @@ def mk_vedio_dirtree(root):
     os.mkdir(root+'/in_area')
     os.mkdir(root+'/no_helmet')
     os.mkdir(root+'/gathered')
-
+    os.mkdir(root+'/falled')
 
 
 if __name__=='__main__':
-    root = 'data/'+str(round(time.time()))
-    mk_vedio_dirtree(root)
-    time.sleep(4)
-    shutil.rmtree(root)
+    mk_vedio_dirtree('data/'+'output_frames')

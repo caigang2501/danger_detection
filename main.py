@@ -8,6 +8,7 @@ os.environ['TORCH_HOME']=os.path.join(os.path.dirname(os.path.abspath(__file__))
 from fire_detect.two_classfy import Predictor as fire_Predictor
 from helmet_detect.predictor import Predictor
 from human_detect.human_detect import HumanDetect
+from human_detect.fall_detect import FallDetector
 from face_sdk.api_usage.face_helper import FaceHelper
 
 from video_processing import v2p_by_time
@@ -80,9 +81,10 @@ def deal_human_result(points,sub_amount,mg_dic):
     len_ = len(os.listdir(mg_dic['frame_folder']))
     with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
         args = gen_args(len_,sub_amount)
-        result_boxs = pool.starmap(detect_human, args)
-        in_area_boxs = [item[0] for row in result_boxs for item in row]
-        gathered_boxs = [item[1] for row in result_boxs for item in row]
+        result_boxs = pool.starmap(detect_human, args)[0]
+        print('human_result_boxs',result_boxs)
+        in_area_boxs = result_boxs[0]
+        gathered_boxs = result_boxs[1]
 
     print('in_area_boxs: ',in_area_boxs,
           '\ngathered_boxs: ',gathered_boxs)
@@ -99,7 +101,7 @@ def detect_fire_by_torch(frame_folder:str):
     fire_predictor = fire_Predictor(fire_model_path)
 
     result = fire_predictor.predict_bypath(orderd_frame_folder[:-2])
-    print(result[1])
+    print('fire_result: ',result[1])
     result = [int(n) for n in result[1]]
     result.append(0)
     # print(type(result[0]),result)
@@ -160,12 +162,40 @@ def deal_helmet_result(sub_amount,mg_dic):
     len_ = len(os.listdir(mg_dic['frame_folder']))
     with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
         args = gen_args(len_,sub_amount)
-        result_boxs = pool.starmap(detect_helmet, args)
-        result_boxs = [item for row in result_boxs for item in row]
+        result_boxs = pool.starmap(detect_helmet, args)[0]
+        print('helmet_result_boxs: ',result_boxs)
 
     print('no_helmet_boxs: ',result_boxs)
     names_helmet = filter_out(result_boxs)
     mg_dic['no_helmet'] = deal_final_result(mg_dic,names_helmet,'no_helmet')
+    return
+
+def detect_fall(t1,t2,frame_folder):
+    result_boxs = []
+    predictor = FallDetector()
+    for i in range(t1,t2):
+        file_name = f"frame_{i}.jpg"
+        print('falled detect: '+file_name)
+        file_path = frame_folder+file_name
+        result = predictor.fall_detect(file_path)
+        result_boxs.append(result)
+    return result_boxs
+
+def deal_fall_result(sub_amount,mg_dic):
+    def gen_args(len_,sub_amount):
+        parts = []
+        for i in range(len_//sub_amount):
+            parts.append((i*sub_amount,(i+1)*sub_amount,mg_dic['frame_folder']))
+        parts.append((len_-len_%sub_amount,len_,mg_dic['frame_folder']))
+        return parts
+
+    len_ = len(os.listdir(mg_dic['frame_folder']))
+    with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
+        args = gen_args(len_,sub_amount)
+        result_boxs = pool.starmap(detect_fall, args)[0]
+    result_boxs = [1 if act in ['Sleeping'] else 0 for act in result_boxs]
+    names_falled = filter_out(result_boxs)
+    mg_dic['falled'] = deal_final_result(mg_dic,names_falled,'falled')
     return
 
 def main_fire(mg_dic):
@@ -211,6 +241,7 @@ def main(url:str,points:List,frame_interval,sub_amount):
     net_tool.download_by_requests(url,video_path)
     # minio_db.down_load(url.split('zhgd/')[-1],video_path)
     root = 'data/'+str(round(time.time()))
+    root = 'data/'+'output_frames'
     frame_folder = root+'/frames/1/'
     ordered_frame_folder = root+'/ordered_frames/1/'
     dir_tools.mk_vedio_dirtree(root)
@@ -223,22 +254,24 @@ def main(url:str,points:List,frame_interval,sub_amount):
         p_fire = mp.Process(target=main_fire,args=(mg_dic,))
         p_human = mp.Process(target=deal_human_result,args=(points,sub_amount,mg_dic))
         p_helmet = mp.Process(target=deal_helmet_result,args=(sub_amount,mg_dic))
-        p_fire.start(),p_helmet.start(),p_human.start()
-        p_fire.join(),p_helmet.join(),p_human.join()
-        results = { 
+        p_fall = mp.Process(target=deal_fall_result,args=(sub_amount,mg_dic))
+        p_fire.start(),p_helmet.start(),p_human.start(),p_fall.start()
+        p_fire.join(),p_helmet.join(),p_human.join(),p_fall.join()
+        results = {
             'eara':ocr_tool.get_video_eara(frame_folder+'/frame_0.jpg'),
             'fired':mg_dic['fired'],
             'no_helmet':mg_dic['no_helmet'],
             'in_area':mg_dic['in_area'],
-            'gathered':mg_dic['gathered']
+            'gathered':mg_dic['gathered'],
+            'falled':mg_dic['falled']
         }
-    shutil.rmtree(root)
+    # shutil.rmtree(root)
     return results
 
 if __name__=='__main__':
     points = ((0, 0, 60, 330, 480, 410, 500, 50),(300,300))
-    frame_interval = 10
-    sub_amount = 10
+    frame_interval = 6
+    sub_amount = 15
     # points = (0,0)
     url = 'http://10.83.190.141:9000/zhgd/detection/test.mp4'
     r = main(url,points,frame_interval,sub_amount)
@@ -249,6 +282,6 @@ if __name__=='__main__':
     # scp D:\workspace\hb_projects\danger_detection/danger_detection.zip user@10.83.190.141:caigang/
     # scp D:\workspace\hb_projects\danger_detection/main.py user@10.83.190.141:caigang/danger_detection/
 
-
+# TODO fire detect have result,but no picture
 
 
