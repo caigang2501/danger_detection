@@ -40,6 +40,7 @@ def detect_human(t1,t2,points,frame_folder):
     return in_area_boxs,gathered_boxs
 
 def filter_out(result_boxs):
+    result_boxs.append(0)
     dq_img = deque()
     latest = 0
     result = []
@@ -79,13 +80,13 @@ def deal_human_result(points,sub_amount,mg_dic):
         return parts
     
     len_ = len(os.listdir(mg_dic['frame_folder']))
+    in_area_boxs,gathered_boxs = [],[]
     with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
         args = gen_args(len_,sub_amount)
-        result_boxs = pool.starmap(detect_human, args)[0]
-        print('human_result_boxs',result_boxs)
-        in_area_boxs = result_boxs[0]
-        gathered_boxs = result_boxs[1]
-
+        result_boxs = pool.starmap(detect_human, args)
+        [in_area_boxs.extend(box[0]) for box in result_boxs]
+        [gathered_boxs.extend(box[1]) for box in result_boxs]
+        
     print('in_area_boxs: ',in_area_boxs,
           '\ngathered_boxs: ',gathered_boxs)
     names_area = filter_out(in_area_boxs)
@@ -113,7 +114,7 @@ def detect_fire_by_torch(frame_folder:str):
     for j,n in enumerate(result):
         if start:
             if n!=0 and not warning:
-                if j-i>=3:
+                if j-i>=2:
                     filed_result.append((i+j)//2)
                     file_name = f"frame_{(i+j)//2}.jpg"
                     shutil.copyfile(frame_folder+file_name,destination_path+file_name)
@@ -126,6 +127,7 @@ def detect_fire_by_torch(frame_folder:str):
                 i = j
                 start = True
     
+    print('filed_result',filed_result)
     # filed_names = [file_name for i,file_name in enumerate(os.listdir(data_root+'/1')) if i in filed_result]
     filed_names = [f"frame_{n}.jpg" for n in filed_result]
     return filed_names
@@ -162,8 +164,8 @@ def deal_helmet_result(sub_amount,mg_dic):
     len_ = len(os.listdir(mg_dic['frame_folder']))
     with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
         args = gen_args(len_,sub_amount)
-        result_boxs = pool.starmap(detect_helmet, args)[0]
-        print('helmet_result_boxs: ',result_boxs)
+        result_boxs = pool.starmap(detect_helmet, args)
+        result_boxs = [r for box in result_boxs for r in box]
 
     print('no_helmet_boxs: ',result_boxs)
     names_helmet = filter_out(result_boxs)
@@ -192,9 +194,13 @@ def deal_fall_result(sub_amount,mg_dic):
     len_ = len(os.listdir(mg_dic['frame_folder']))
     with mp.Pool(processes=min(len_//sub_amount+1,30)) as pool:
         args = gen_args(len_,sub_amount)
-        result_boxs = pool.starmap(detect_fall, args)[0]
+        result_boxs = pool.starmap(detect_fall, args)
+        result_boxs = [r for box in result_boxs for r in box]
+    print('falled_result:',result_boxs)
     result_boxs = [1 if act in ['Sleeping'] else 0 for act in result_boxs]
+    print('falled_result:',result_boxs)
     names_falled = filter_out(result_boxs)
+    print('falled_result:',names_falled)
     mg_dic['falled'] = deal_final_result(mg_dic,names_falled,'falled')
     return
 
@@ -257,6 +263,7 @@ def main(url:str,points:List,frame_interval,sub_amount):
         p_fall = mp.Process(target=deal_fall_result,args=(sub_amount,mg_dic))
         p_fire.start(),p_helmet.start(),p_human.start(),p_fall.start()
         p_fire.join(),p_helmet.join(),p_human.join(),p_fall.join()
+        # p_helmet.start(),p_helmet.join()
         results = {
             'eara':ocr_tool.get_video_eara(frame_folder+'/frame_0.jpg'),
             'fired':mg_dic['fired'],
@@ -269,8 +276,8 @@ def main(url:str,points:List,frame_interval,sub_amount):
     return results
 
 if __name__=='__main__':
-    points = ((0, 0, 60, 330, 480, 410, 500, 50),(300,300))
-    frame_interval = 6
+    points = ((150, 200, 50, 300, 300, 300, 400, 200),(300,300))
+    frame_interval = 5
     sub_amount = 15
     # points = (0,0)
     url = 'http://10.83.190.141:9000/zhgd/detection/test.mp4'
@@ -282,6 +289,5 @@ if __name__=='__main__':
     # scp D:\workspace\hb_projects\danger_detection/danger_detection.zip user@10.83.190.141:caigang/
     # scp D:\workspace\hb_projects\danger_detection/main.py user@10.83.190.141:caigang/danger_detection/
 
-# TODO fire detect have result,but no picture
 
 

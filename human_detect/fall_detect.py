@@ -24,7 +24,7 @@ class FallDetector():
 
 
 if __name__=='__main__':
-    image_path = "data/train/fall/fall002.jpg"
+    image_path = "data/output_frames/frames/1/frame_19.jpg"
     predictor = FallDetector()
     result = predictor.fall_detect(image_path)
     print(result)
